@@ -52,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<List<JSONN>> fetchJson() async {
     var url = 'https://us-central1-savvy-expense.cloudfunctions.net/getUser';
-    var response = await http.get(url);
+    var response = await http
+        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
 
     // ignore: deprecated_member_use
     var myJsonData = List<JSONN>();
@@ -127,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           },
-          itemCount: _jdata.length,
+          itemCount: _jdata == null ? 0 : _jdata.length,
         ));
   }
 }
